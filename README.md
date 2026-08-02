@@ -62,35 +62,4 @@ This project also helped us gain practical knowledge in:
 
 ---
 
-## 🧠 How Does This Project Work?
-
-The project works through the following process:
-
-```text
-Fingerprint Images + Verified Blood Group Labels
-                    ↓
-          Image Preprocessing
-                    ↓
-            CNN Model Training
-                    ↓
-       Model Learns Image Patterns
-                    ↓
-          New Fingerprint Image
-                    ↓
-          CNN Feature Extraction
-                    ↓
-          Blood Group Prediction
-                    ↓
-       Prediction Displayed in App
-
-## 🔮 Future Scope & Proposed Idea
-
-Our idea is that if **fingerprint images and verified blood group information are collected from people across villages and cities**, a large labeled dataset can be created to train a **Deep Learning model**.
-
-In the future, each person's fingerprint can be linked to a **unique identification number**, similar to an Aadhaar number, and the data can be stored securely in a **centralized database**.
-
-In emergency situations, an **authorized user** can enter the unique ID on a website to quickly retrieve the person's **blood group and other relevant information**.
-
-This proposed system aims to provide **fast, secure, and efficient access to blood group details when needed**, especially during emergency situations.
-
-> **Note:** This represents the **future scope and proposed idea of our project**. The current project is primarily developed to study and demonstrate the possible relationship between fingerprint patterns and blood groups using Deep Learning.
+.

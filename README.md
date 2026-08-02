@@ -1,2 +1,84 @@
 # AI-Based-Blood-Group-Prediction-Using-Fingerprint-Images-with-Deep-Learning
 AI-based blood group prediction using fingerprint images and Deep Learning, with a proposed approach for quick access to verified blood group information during emergency situations.
+# AI-Based Blood Group Prediction Using Fingerprint Images with Deep Learning
+
+## 📌 Project Overview
+
+This project is based on a research paper that explores the possible relationship between fingerprint patterns and blood groups.
+
+The main idea of this project is to investigate whether meaningful patterns exist between fingerprint images and blood groups and whether Deep Learning can be used to learn these patterns.
+
+A Convolutional Neural Network (CNN) is used to train a model using fingerprint images associated with blood group labels. After training, a new fingerprint image can be provided as input to the application, and the trained model predicts the corresponding blood group.
+
+This project is developed for academic and research purposes to explore and experimentally test this concept.
+
+---
+
+## 🔬 Research Background
+
+The project is inspired by research that investigates the possible relationship between fingerprint patterns and blood groups.
+
+Our project does not claim that a fingerprint can already be used as a medically approved replacement for clinical blood group testing.
+
+Instead, the purpose of this project is to use Deep Learning and CNN techniques to experimentally investigate whether fingerprint images contain meaningful patterns that can be learned by a model and used for blood group prediction.
+
+---
+
+## 🎯 Main Objective
+
+The main objective of this project is to explore the use of Deep Learning with fingerprint images to study the possible relationship between fingerprint patterns and blood groups.
+
+The project aims to:
+
+- Collect fingerprint images with corresponding blood group labels.
+- Preprocess the fingerprint images.
+- Train a Convolutional Neural Network (CNN).
+- Allow the model to learn patterns from fingerprint images.
+- Test the trained model using new fingerprint images.
+- Observe whether the model can predict the corresponding blood group.
+- Explore the possibility of using this concept for faster access to blood group information in future applications.
+
+---
+
+## 💡 Why Did We Choose This Project?
+
+Blood group identification is important, especially during emergency situations.
+
+Traditional blood group testing generally requires a blood sample, laboratory procedures, equipment, and trained personnel.
+
+Through this research-based project, we wanted to explore whether fingerprint images could be used with Artificial Intelligence and Deep Learning to investigate the possibility of predicting blood groups.
+
+This project also helped us gain practical knowledge in:
+
+- Artificial Intelligence
+- Deep Learning
+- Convolutional Neural Networks
+- Image Processing
+- Computer Vision
+- Python
+- TensorFlow
+- Keras
+- Flask Web Development
+
+---
+
+## 🧠 How Does This Project Work?
+
+The project works through the following process:
+
+```text
+Fingerprint Images + Verified Blood Group Labels
+                    ↓
+          Image Preprocessing
+                    ↓
+            CNN Model Training
+                    ↓
+       Model Learns Image Patterns
+                    ↓
+          New Fingerprint Image
+                    ↓
+          CNN Feature Extraction
+                    ↓
+          Blood Group Prediction
+                    ↓
+       Prediction Displayed in App

@@ -63,3 +63,10 @@ This project also helped us gain practical knowledge in:
 ---
 
 .
+## 🖼️ Project Overview
+
+<p align="center">
+  <img src="project-overview.png" alt="AI-Based Blood Group Prediction Project Overview" width="100%">
+</p>
+
+---

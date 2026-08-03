@@ -38,6 +38,44 @@ The project aims to:
 - Observe whether the model can predict the corresponding blood group.
 - Explore the possibility of using this concept for faster access to blood group information in future applications.
 
+
+  ## 📊 Dataset
+
+The dataset used for this project consists of fingerprint images organized into 8 blood-group classes:
+
+- A+
+- A-
+- AB+
+- AB-
+- B+
+- B-
+- O+
+- O-
+
+The fingerprint images are arranged into separate folders based on their corresponding blood-group labels. This folder structure is used by TensorFlow's `ImageDataGenerator` for loading and preprocessing the images during CNN training.
+
+### Dataset Preparation
+
+- Fingerprint images are resized to **128 × 128 pixels**.
+- Pixel values are normalized using **rescaling (1./255)**.
+- The dataset is divided into:
+  - **80% training data**
+  - **20% validation data**
+- The images are used as labeled inputs for training the Convolutional Neural Network (CNN).
+
+### Dataset Structure
+
+```text
+dataset/
+├── A+/
+├── A-/
+├── AB+/
+├── AB-/
+├── B+/
+├── B-/
+├── O+/
+├── O-/
+
 ---
 
 ## 💡 Why Did We Choose This Project?

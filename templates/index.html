@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Amrita Sai | AI Blood Group Detection</title>
+    <!-- Google Fonts for modern typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+            background: url("https://images.unsplash.com/photo-1581595219315-a187dd40c322") no-repeat center center fixed;
+            background-size: cover;
+            position: relative;
+        }
+
+        /* refined overlay for better readability and elegance */
+        .overlay {
+            background: rgba(0, 0, 0, 0.65);
+            backdrop-filter: blur(1px);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem 1rem;
+        }
+
+        /* main card - glassmorphism + solid white base for content */
+        .container {
+            background: #ffffff;
+            max-width: 550px;
+            width: 100%;
+            border-radius: 32px;
+            box-shadow: 0 25px 45px -12px rgba(0, 0, 0, 0.4), 0 4px 12px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            backdrop-filter: blur(0px);
+        }
+
+        .container:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 30px 50px -15px rgba(0, 0, 0, 0.5);
+        }
+
+        /* ---- COLLEGE HEADER with BACKGROUND IMAGE (required feature) ---- */
+        .college-banner {
+            background: linear-gradient(0deg, rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.55)), 
+                        url('https://images.unsplash.com/photo-1526256262350-7da7584cf5df?w=1200&h=280&fit=crop');
+            background-size: cover;
+            background-position: center 30%;
+            padding: 2rem 1.5rem;
+            text-align: center;
+            border-bottom: 3px solid #c0392b;
+        }
+
+        /* fallback image if unsplash fails - solid gradient with pattern feel */
+        @supports (background: linear-gradient(0deg, #000, #000)) {
+            .college-banner {
+                background: linear-gradient(0deg, rgba(0, 0, 0, 0.7), rgba(110, 25, 25, 0.6)), 
+                            url('https://images.pexels.com/photos/4386466/doctor-holding-stethoscope-close-up-4386466.jpg?auto=compress&cs=tinysrgb&w=1200&h=300&fit=crop');
+                background-size: cover;
+                background-position: center;
+            }
+        }
+
+        .institution-name {
+            font-size: 1.8rem;
+            font-weight: 700;
+            letter-spacing: -0.3px;
+            color: white;
+            text-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+            margin-bottom: 0.5rem;
+            word-break: break-word;
+        }
+
+        .clinic-tagline {
+            font-size: 1rem;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.95);
+            background: rgba(192, 57, 43, 0.85);
+            display: inline-block;
+            padding: 0.3rem 1rem;
+            border-radius: 40px;
+            backdrop-filter: blur(4px);
+            letter-spacing: 0.3px;
+            margin-top: 8px;
+        }
+
+        /* content area */
+        .content {
+            padding: 2rem 1.8rem 2.2rem;
+        }
+
+        .brand-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 0.75rem;
+        }
+
+        .brand-icon span {
+            font-size: 2rem;
+        }
+
+        .title-main {
+            font-size: 1.65rem;
+            font-weight: 700;
+            color: #1e2a3e;
+            margin-bottom: 0.5rem;
+            text-align: center;
+        }
+
+        .description {
+            color: #4a5568;
+            text-align: center;
+            margin-bottom: 1.8rem;
+            font-size: 0.95rem;
+            border-left: 3px solid #c0392b;
+            padding-left: 0.8rem;
+            margin-left: auto;
+            margin-right: auto;
+            max-width: 90%;
+            background: #fef6f5;
+            border-radius: 12px;
+            padding: 0.7rem 1rem;
+        }
+
+        /* modern file upload styling */
+        .file-upload-wrapper {
+            margin: 1.5rem 0 1rem;
+            position: relative;
+        }
+
+        .custom-file-label {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #f8f9fc;
+            border: 2px dashed #cbd5e0;
+            border-radius: 28px;
+            padding: 0.8rem 1.2rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-weight: 500;
+            color: #2d3748;
+        }
+
+        .custom-file-label:hover {
+            border-color: #c0392b;
+            background: #fff5f3;
+        }
+
+        .file-icon {
+            font-size: 1.3rem;
+            margin-right: 10px;
+        }
+
+        .file-name {
+            flex: 1;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            font-size: 0.9rem;
+            color: #4a5568;
+        }
+
+        .browse-text {
+            background: #c0392b;
+            color: white;
+            padding: 0.3rem 1rem;
+            border-radius: 40px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            transition: 0.2s;
+        }
+
+        input[type="file"] {
+            display: none;
+        }
+
+        /* submit button premium */
+        .submit-btn {
+            background: linear-gradient(95deg, #c0392b 0%, #e25c4a 100%);
+            color: white;
+            padding: 14px 24px;
+            border: none;
+            border-radius: 48px;
+            font-size: 1.05rem;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 10px;
+            transition: all 0.25s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            box-shadow: 0 6px 14px rgba(192, 57, 43, 0.3);
+        }
+
+        .submit-btn:hover {
+            background: linear-gradient(95deg, #a93226 0%, #c94232 100%);
+            transform: scale(1.01);
+            box-shadow: 0 10px 20px rgba(192, 57, 43, 0.4);
+        }
+
+        .submit-btn:active {
+            transform: scale(0.98);
+        }
+
+        /* result card */
+        .result {
+            margin-top: 28px;
+            background: #fef9f7;
+            border-radius: 28px;
+            padding: 1.2rem;
+            text-align: center;
+            border-left: 5px solid #c0392b;
+            transition: all 0.2s;
+            animation: fadeSlideUp 0.4s ease;
+        }
+
+        .result-label {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 600;
+            color: #7f8c8d;
+        }
+
+        .blood-group-value {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: #c0392b;
+            margin-top: 8px;
+            letter-spacing: 1px;
+            background: white;
+            display: inline-block;
+            padding: 0.2rem 1.2rem;
+            border-radius: 60px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        @keyframes fadeSlideUp {
+            from {
+                opacity: 0;
+                transform: translateY(15px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* small responsiveness */
+        @media (max-width: 550px) {
+            .container {
+                border-radius: 28px;
+            }
+            .content {
+                padding: 1.5rem;
+            }
+            .institution-name {
+                font-size: 1.4rem;
+            }
+            .blood-group-value {
+                font-size: 1.7rem;
+            }
+            .custom-file-label {
+                padding: 0.6rem 1rem;
+            }
+        }
+
+        /* additional micro-interaction & footer */
+        .info-note {
+            font-size: 0.7rem;
+            text-align: center;
+            color: #94a3b8;
+            margin-top: 1.5rem;
+            border-top: 1px solid #edf2f7;
+            padding-top: 1rem;
+        }
+
+        .blood-drop {
+            display: inline-block;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 0.8;}
+            50% { transform: scale(1.08); opacity: 1;}
+            100% { transform: scale(1); opacity: 0.8;}
+        }
+    </style>
+</head>
+<body>
+
+<div class="overlay">
+    <div class="container">
+        <!-- COLLEGE NAME SECTION WITH BACKGROUND IMAGE (exactly as required: top college name with bg image) -->
+        <div class="college-banner">
+            <div class="institution-name">🏥 Amrita Sai Institute of Science and Technology</div>
+            <div class="clinic-tagline">⚕️ AI Blood Group Detection & Research Clinic ⚕️</div>
+        </div>
+
+        <div class="content">
+            <div class="brand-icon">
+                <span>🩸</span>
+                <span>🧬</span>
+                <span>🔬</span>
+            </div>
+            <div class="title-main">
+                AI-Powered Blood Group Predictor
+            </div>
+            <div class="description">
+                📸 Upload a clear fingerprint image • Advanced deep learning model predicts ABO & Rh type instantly
+            </div>
+
+            <!-- IMPORTANT: form untouched core logic: method POST, enctype, input name="file", no action attribute (sends to same URL) -->
+            <form method="post" enctype="multipart/form-data" id="bloodForm">
+                <div class="file-upload-wrapper">
+                    <label for="fingerprintFile" class="custom-file-label">
+                        <span class="file-icon">📁</span>
+                        <span class="file-name" id="fileNameDisplay">No file chosen</span>
+                        <span class="browse-text">Browse</span>
+                    </label>
+                    <input type="file" name="file" id="fingerprintFile" accept="image/*" required>
+                </div>
+                <button type="submit" class="submit-btn">
+                    <span>🔮</span> Predict Blood Group <span class="blood-drop">🩸</span>
+                </button>
+            </form>
+
+            <!-- Prediction result block (kept exactly as original Jinja logic) -->
+            {% if prediction %}
+            <div class="result">
+                <div class="result-label">🩸 AI PREDICTION RESULT</div>
+                <div class="blood-group-value">{{ prediction }}</div>
+                <div style="font-size: 0.8rem; margin-top: 10px;">✔️ Based on fingerprint pattern analysis</div>
+            </div>
+            {% endif %}
+
+            <div class="info-note">
+                <span>🔒 Secure & Anonymous • Instant AI Inference • Medical Research Grade</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Simple JavaScript for better UI: update filename display (does NOT affect backend logic) -->
+<script>
+    (function() {
+        const fileInput = document.getElementById('fingerprintFile');
+        const fileNameSpan = document.getElementById('fileNameDisplay');
+        
+        if (fileInput && fileNameSpan) {
+            fileInput.addEventListener('change', function(e) {
+                if (fileInput.files && fileInput.files.length > 0) {
+                    const name = fileInput.files[0].name;
+                    // truncate long names for better UI
+                    const displayName = name.length > 35 ? name.substring(0, 30) + '...' : name;
+                    fileNameSpan.textContent = displayName;
+                    fileNameSpan.style.color = '#c0392b';
+                    fileNameSpan.style.fontWeight = '500';
+                } else {
+                    fileNameSpan.textContent = 'No file chosen';
+                    fileNameSpan.style.color = '#4a5568';
+                }
+            });
+        }
+        
+        // Optional: add loading state on form submit for better UX (doesn't break existing backend)
+        const form = document.getElementById('bloodForm');
+        if (form) {
+            form.addEventListener('submit', function() {
+                const submitBtn = document.querySelector('.submit-btn');
+                if (submitBtn) {
+                    submitBtn.innerHTML = '<span>⏳</span> Analyzing fingerprint... <span>🩸</span>';
+                    submitBtn.disabled = true;
+                    submitBtn.style.opacity = '0.8';
+                }
+            });
+        }
+    })();
+</script>
+
+<!-- 
+    ===============  IMPORTANT NOTES ===============
+    - Original backend logic is 100% preserved: 
+        * form action empty -> submits to same endpoint.
+        * input name="file", method="post", enctype="multipart/form-data"
+        * prediction variable rendered via Jinja2: {{ prediction }}
+    - Enhanced UI adds college banner with background image, clinic name:
+        "Amrita Sai Institute of Science and Technology"
+        "AI Blood Group Detection & Research Clinic"
+    - No changes to core detection logic / required fields.
+    - Fully responsive, modern card design, maintains all original functionality.
+    =================================================
+-->
+</body>
+</html>

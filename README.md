@@ -63,18 +63,6 @@ The fingerprint images are arranged into separate folders based on their corresp
   - **20% validation data**
 - The images are used as labeled inputs for training the Convolutional Neural Network (CNN).
 
-### Dataset Structure
-
-```text
-dataset/
-├── A+/
-├── A-/
-├── AB+/
-├── AB-/
-├── B+/
-├── B-/
-├── O+/
-├── O-/
 
 ---
 
